@@ -1,9 +1,10 @@
 import base64
+from typing import Optional
 
 import requests
 
 
-def get_access_token(client_id: str, client_secret: str) -> str:
+def get_access_token(client_id: str, client_secret: str) -> Optional[str]:
     """Retrieves access token for the provided client id & secret"""
     url = "https://accounts.spotify.com/api/token"
 
