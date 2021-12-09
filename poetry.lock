@@ -411,8 +411,8 @@ testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", 
 
 [metadata]
 lock-version = "1.1"
-python-versions = "3.8.*"
-content-hash = "ea30eb4ab35cf57502a14ef79fe28acdfcb7a16815474d30c440d00c3957f86d"
+python-versions = "3.9.*"
+content-hash = "a96d6bcd16513daca5c2f186d82b3d60b0c909927be451057dcbb7490cb1ea54"
 
 [metadata.files]
 async-generator = [

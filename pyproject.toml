@@ -6,7 +6,7 @@ authors = ["wol4aravio <panovskiy.v@yandex.ru>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "3.8.*"
+python = "3.9.*"
 requests = "^2.26.0"
 
 [tool.poetry.dev-dependencies]
