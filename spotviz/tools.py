@@ -11,12 +11,15 @@ def _get_bearer(client_id: str, client_secret: str) -> str:
     return encoded_bearer_info
 
 
-def _request_api(url: str, bearer_info: str, **kwargs) -> requests.Response:
+def _request_api(
+    url: str, method_name: str, bearer_info: str, **kwargs
+) -> requests.Response:
     headers = {
         "Authorization": f"Basic {bearer_info}",
         "Content-Type": "application/x-www-form-urlencoded",
     }
-    return requests.post(url, headers=headers, **kwargs)
+    request_method = getattr(requests, method_name)
+    return request_method(url, headers=headers, **kwargs)
 
 
 def get_access_token(client_id: str, client_secret: str) -> Optional[str]:
@@ -25,7 +28,12 @@ def get_access_token(client_id: str, client_secret: str) -> Optional[str]:
     bearer_info = _get_bearer(client_id, client_secret)
     payload = {"grant_type": "client_credentials"}
 
-    request_result = _request_api(url, bearer_info, **dict(data=payload))
+    request_result = _request_api(
+        url=url,
+        method_name="post",
+        bearer_info=bearer_info,
+        **dict(data=payload),
+    )
 
     if request_result.ok:
         return request_result.json()["access_token"]
