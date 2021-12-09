@@ -11,28 +11,35 @@ def _get_bearer(client_id: str, client_secret: str) -> str:
     return encoded_bearer_info
 
 
-def _request_api(url: str, method_name: str, bearer_info: str, **kwargs) -> requests.Response:
-    headers = {
-        "Authorization": f"Basic {bearer_info}",
-        "Content-Type": "application/x-www-form-urlencoded",
-    }
-    request_method = getattr(requests, method_name)
-    return request_method(url, headers=headers, **kwargs)
-
-
 def get_access_token(client_id: str, client_secret: str) -> Optional[str]:
     """Retrieves access token for the provided client id & secret"""
     url = "https://accounts.spotify.com/api/token"
-    bearer_info = _get_bearer(client_id, client_secret)
+    bearer_token = _get_bearer(client_id, client_secret)
+    headers = {
+        "Authorization": f"Basic {bearer_token}",
+        "Content-Type": "application/x-www-form-urlencoded",
+    }
     payload = {"grant_type": "client_credentials"}
 
-    request_result = _request_api(
+    request_result = requests.post(
         url=url,
-        method_name="post",
-        bearer_info=bearer_info,
-        **dict(data=payload),
+        headers=headers,
+        data=payload,
     )
 
     if request_result.ok:
         return request_result.json()["access_token"]
     return None
+
+
+def get_playlist_info(playlist_id: str, bearer_token: str):
+    """Retrieve playlist info for the provided id and token"""
+    url = f"https://api.spotify.com/v1/playlists/{playlist_id}"
+    headers = {
+        "Authorization": f"Bearer {bearer_token}",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+    }
+    request_result = requests.get(url, headers=headers)
+
+    return request_result
