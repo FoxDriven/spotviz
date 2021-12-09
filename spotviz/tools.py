@@ -43,3 +43,16 @@ def get_playlist_info(playlist_id: str, bearer_token: str):
     request_result = requests.get(url, headers=headers)
 
     return request_result
+
+
+def get_track_info(track_id: str, bearer_token: str):
+    """Retrieve playlist info for the provided id and token"""
+    url = f"https://api.spotify.com/v1/audio-features/{track_id}"
+    headers = {
+        "Authorization": f"Bearer {bearer_token}",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+    }
+    request_result = requests.get(url, headers=headers)
+
+    return request_result
