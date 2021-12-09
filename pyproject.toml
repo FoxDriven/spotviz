@@ -16,7 +16,7 @@ rope = "^0.22.0"
 pyre-check = "^0.9.8"
 
 [tool.black]
-line-length = 79
+line-length = 99
 include = '\.pyi?$'
 exclude = '''
 /(

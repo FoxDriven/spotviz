@@ -11,9 +11,7 @@ def _get_bearer(client_id: str, client_secret: str) -> str:
     return encoded_bearer_info
 
 
-def _request_api(
-    url: str, method_name: str, bearer_info: str, **kwargs
-) -> requests.Response:
+def _request_api(url: str, method_name: str, bearer_info: str, **kwargs) -> requests.Response:
     headers = {
         "Authorization": f"Basic {bearer_info}",
         "Content-Type": "application/x-www-form-urlencoded",
