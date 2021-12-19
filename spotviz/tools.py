@@ -42,7 +42,7 @@ def get_playlist_info(playlist_id: str, bearer_token: str):
     }
     request_result = requests.get(url, headers=headers)
 
-    return request_result
+    return request_result.json()
 
 
 def get_track_info(track_id: str, bearer_token: str):
@@ -55,4 +55,4 @@ def get_track_info(track_id: str, bearer_token: str):
     }
     request_result = requests.get(url, headers=headers)
 
-    return request_result
+    return request_result.json()
